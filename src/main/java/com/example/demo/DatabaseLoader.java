@@ -33,9 +33,13 @@ public class DatabaseLoader implements CommandLineRunner {
 
        Curso c1=new Curso("Base de Datos");
 	   this.repositoryC.save(c1);
+	   Curso c2=new Curso("Ingles");
+	   this.repositoryC.save(c2);
+
 
 	   this.repositoryM.save(new Matricula(a1,c1,2023));
 	   this.repositoryM.save(new Matricula(a2,c1 ,2023));
+	    this.repositoryM.save(new Matricula(a2,c2 ,2023));
 
 
 	}
