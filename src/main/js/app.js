@@ -8,6 +8,7 @@ const HomePage = require('./pages/home');
 const NuevoAlumnoPage = require('./pages/nuevo-alumno');
 const VerCursoPage = require('./pages/ver-curso');
 const EditarCursoPage = require('./pages/editar-curso');
+const NuevaMatriculaPage = require('./pages/nueva-matricula');
 const EditarAlumnoPage = require('./pages/editar-alumno');
 
 
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
 	 { path: '/ver-curso/:id', element: <VerCursoPage /> },
 	 { path: '/nuevo-curso', element: <NuevoCursoPage /> },
      { path: '/editar-curso/:id', element: <EditarCursoPage /> },
+	 { path: '/ver-curso/:id/nueva-matricula', element: <NuevaMatriculaPage /> },
+	 { path: '/nueva-matricula', element: <NuevaMatriculaPage /> },
 	 { path: '/editar-alumno/:id', element: <EditarAlumnoPage /> },
 
 ])
