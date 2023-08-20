@@ -40845,7 +40845,7 @@ var VerAlumnoPage = __webpack_require__(/*! ./pages/ver-alumno */ "./src/main/js
 var NuevoAlumnoPage = __webpack_require__(/*! ./pages/nuevo-alumno */ "./src/main/js/pages/nuevo-alumno.js");
 var VerCursoPage = __webpack_require__(/*! ./pages/ver-curso */ "./src/main/js/pages/ver-curso.js");
 var EditarCursoPage = __webpack_require__(/*! ./pages/editar-curso */ "./src/main/js/pages/editar-curso.js");
-var NuevaMatriculaPage = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module './pages/nueva-matricula'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var NuevaMatriculaPage = __webpack_require__(/*! ./pages/nueva-matricula */ "./src/main/js/pages/nueva-matricula.js");
 var EditarAlumnoPage = __webpack_require__(/*! ./pages/editar-alumno */ "./src/main/js/pages/editar-alumno.js");
 var router = createBrowserRouter([{
   path: '/',
@@ -41272,6 +41272,127 @@ module.exports = HomePage;
 
 /***/ }),
 
+/***/ "./src/main/js/pages/nueva-matricula.js":
+/*!**********************************************!*\
+  !*** ./src/main/js/pages/nueva-matricula.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var _require = __webpack_require__(/*! react */ "./node_modules/react/index.js"),
+  useState = _require.useState,
+  useEffect = _require.useEffect;
+var _require2 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js"),
+  Link = _require2.Link,
+  useParams = _require2.useParams;
+var client = __webpack_require__(/*! ../client */ "./src/main/js/client.js");
+var NuevaMatriculaPage = function NuevaMatriculaPage() {
+  var _useParams = useParams(),
+    id = _useParams.id;
+  var _useState = useState([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    cursos = _useState2[0],
+    setCursos = _useState2[1];
+  var _useState3 = useState([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    alumnos = _useState4[0],
+    setAlumnos = _useState4[1];
+  var _useState5 = useState(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    idCurso = _useState6[0],
+    setIdCurso = _useState6[1];
+  var _useState7 = useState(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    idAlumno = _useState8[0],
+    setIdAlumno = _useState8[1];
+  var _useState9 = useState(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    anio = _useState10[0],
+    setAnio = _useState10[1];
+  var handleSubmit = function handleSubmit(evento) {
+    evento.preventDefault();
+    client({
+      method: 'POST',
+      path: '/api/matriculas',
+      entity: {
+        curso: 'http://localhost:8080/api/cursos/' + idCurso,
+        alumno: 'http://localhost:8080/api/alumnos/' + idAlumno,
+        anio: anio
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).done(function () {
+      window.location = '/';
+    });
+  };
+  useEffect(function () {
+    client({
+      method: 'GET',
+      path: '/api/cursos'
+    }).done(function (response) {
+      setCursos(response.entity._embedded.cursos);
+    });
+    client({
+      method: 'GET',
+      path: '/api/alumnos'
+    }).done(function (response) {
+      setAlumnos(response.entity._embedded.alumnos);
+    });
+  }, []);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Nueva Matricula"), /*#__PURE__*/React.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "curso"
+  }, "Curso "), /*#__PURE__*/React.createElement("select", {
+    name: "curso",
+    id: "curso",
+    onChange: function onChange(e) {
+      setIdCurso(e.target.value);
+    }
+  }, cursos.map(function (curso) {
+    var value = curso._links.self.href.split('/').slice(-1);
+    return /*#__PURE__*/React.createElement("option", {
+      key: value,
+      value: value
+    }, "[", curso.nombre, "]");
+  })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "Alumnos "), /*#__PURE__*/React.createElement("select", {
+    name: "alumno",
+    id: "alumno",
+    onChange: function onChange(e) {
+      setIdAlumno(e.target.value);
+    }
+  }, alumnos.map(function (alumno) {
+    var value = alumno._links.self.href.split('/').slice(-1);
+    return /*#__PURE__*/React.createElement("option", {
+      key: value,
+      value: value
+    }, "(", alumno.nombre, ")");
+  })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "A\xD1O"), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    id: "anio",
+    name: "anio",
+    onChange: function onChange(e) {
+      return setAnio(e.target.value);
+    }
+  }), " ", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    type: "submit",
+    value: "Nueva Matricula"
+  })), /*#__PURE__*/React.createElement(Link, {
+    to: "/"
+  }, "Volver"));
+};
+module.exports = NuevaMatriculaPage;
+
+/***/ }),
+
 /***/ "./src/main/js/pages/nuevo-alumno.js":
 /*!*******************************************!*\
   !*** ./src/main/js/pages/nuevo-alumno.js ***!
@@ -41473,7 +41594,8 @@ var _require = __webpack_require__(/*! react-router-dom */ "./node_modules/react
   Link = _require.Link,
   useParams = _require.useParams;
 var _require2 = __webpack_require__(/*! react */ "./node_modules/react/index.js"),
-  useState = _require2.useState;
+  useState = _require2.useState,
+  useEffect = _require2.useEffect;
 var client = __webpack_require__(/*! ../client */ "./src/main/js/client.js");
 var VerCursoPage = function VerCursoPage() {
   var _useParams = useParams(),
@@ -41482,13 +41604,35 @@ var VerCursoPage = function VerCursoPage() {
     _useState2 = _slicedToArray(_useState, 2),
     curso = _useState2[0],
     setCurso = _useState2[1];
-  client({
-    method: 'GET',
-    path: '/api/cursos/' + id
-  }).done(function (response) {
-    return setCurso(response.entity);
-  });
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Ver Curso"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Nombre"), /*#__PURE__*/React.createElement("td", null, curso.nombre))), /*#__PURE__*/React.createElement(Link, {
+  var _useState3 = useState([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    matriculas = _useState4[0],
+    setMatriculas = _useState4[1];
+  useEffect(function () {
+    client({
+      method: 'GET',
+      path: '/api/cursos/' + id
+    }).done(function (response) {
+      return setCurso(response.entity);
+    });
+    client({
+      method: 'GET',
+      path: '/api/matriculas/' + id + '/datos'
+    }).done(function (response) {
+      return setMatriculas(response.entity);
+    });
+  }, []);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Ver Curso"), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("table", {
+    border: "1"
+  }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Nombre"), /*#__PURE__*/React.createElement("td", null, curso.nombre)))), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("h2", null, "Datos"), /*#__PURE__*/React.createElement("table", {
+    border: "1"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Alumno"), /*#__PURE__*/React.createElement("th", null, "Curso"), /*#__PURE__*/React.createElement("th", null, "A\xD1O"))), /*#__PURE__*/React.createElement("tbody", null, matriculas.map(function (matricula) {
+    return /*#__PURE__*/React.createElement("tr", {
+      key: matricula.ID
+    }, /*#__PURE__*/React.createElement("td", null, matricula.ALUMNO), /*#__PURE__*/React.createElement("td", null, matricula.CURSO), /*#__PURE__*/React.createElement("td", null, matricula.ANIO));
+  }))), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(Link, {
+    to: '/ver-curso/${id}/nueva-matricula'
+  }, "Nueva Matricula"), " |", /*#__PURE__*/React.createElement(Link, {
     to: "/"
   }, "Volver"));
 };
