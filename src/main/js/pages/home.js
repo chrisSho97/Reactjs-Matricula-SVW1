@@ -3,10 +3,6 @@ const React = require('react');
 const client = require('../client');
 const {Link} = require('react-router-dom');
 
-
-
-
-
 class HomePage extends React.Component { 
 
 	constructor(props) {
@@ -27,12 +23,18 @@ class HomePage extends React.Component {
 		return (
 			<>
          <h1>REACT JS MATRICULA</h1>
+		 <div style={  {"width": "100%", "display": "flex"}   }>
+		 <div style={{"width": "calc(100% / 3)"}}>
          <Titulo entidad="Alumnos" emoji="👨‍🎓" />
 			<AlumnoList alumnos={this.state.alumnos}/>
             <Link to="/nuevo-alumno">Nuevo Alumno</Link>
+			</div>
+			<div style={{"width": "calc(100% / 3)"}}>
             <Titulo entidad="Cursos" emoji="📗" />
 			<CursoList cursos={this.state.cursos}/>
             <Link to="/nuevo-curso">Nuevo Curso</Link>
+			</div>
+				</div>
 
 			</>
 		)

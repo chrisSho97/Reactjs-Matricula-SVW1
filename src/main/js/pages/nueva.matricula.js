@@ -20,8 +20,8 @@ const NuevaMatriculaPage = () => {
             method: 'POST',
             path: '/api/matriculas',
             entity: {
-                curso: 'http://localhost:8080/api/ventas/'+idCurso,
-                alumno: 'http://localhost:8080/api/productos/'+idAlumno,
+                curso: 'http://localhost:8080/api/cursos/'+idCurso,
+                alumno: 'http://localhost:8080/api/alumnos/'+idAlumno,
                 anio: anio},
             headers: {'Content-Type': 'application/json'}
         }).done(()=>{
@@ -40,7 +40,7 @@ const NuevaMatriculaPage = () => {
             method: 'GET',
             path: '/api/alumnos'
         }).done(response=>{
-            setProductos(response.entity._embedded.alumnos)
+            setAlumnos(response.entity._embedded.alumnos)
         })
 
     },[])
@@ -60,7 +60,7 @@ const NuevaMatriculaPage = () => {
                     })}
                 </select><br />
                 
-                <label>Alumno </label>
+                <label>Alumnos </label>
                 <select name="alumno" id="alumno" onChange={(e)=>{setIdAlumno(e.target.value)}}>
                     {alumnos.map(alumno => {	
                         const value = alumno._links.self.href.split('/').slice(-1)

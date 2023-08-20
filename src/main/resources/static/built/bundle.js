@@ -40845,6 +40845,7 @@ var VerAlumnoPage = __webpack_require__(/*! ./pages/ver-alumno */ "./src/main/js
 var NuevoAlumnoPage = __webpack_require__(/*! ./pages/nuevo-alumno */ "./src/main/js/pages/nuevo-alumno.js");
 var VerCursoPage = __webpack_require__(/*! ./pages/ver-curso */ "./src/main/js/pages/ver-curso.js");
 var EditarCursoPage = __webpack_require__(/*! ./pages/editar-curso */ "./src/main/js/pages/editar-curso.js");
+var NuevaMatriculaPage = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module './pages/nueva-matricula'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 var EditarAlumnoPage = __webpack_require__(/*! ./pages/editar-alumno */ "./src/main/js/pages/editar-alumno.js");
 var router = createBrowserRouter([{
   path: '/',
@@ -40864,6 +40865,12 @@ var router = createBrowserRouter([{
 }, {
   path: '/editar-curso/:id',
   element: /*#__PURE__*/React.createElement(EditarCursoPage, null)
+}, {
+  path: '/ver-curso/:id/nueva-matricula',
+  element: /*#__PURE__*/React.createElement(NuevaMatriculaPage, null)
+}, {
+  path: '/nueva-matricula',
+  element: /*#__PURE__*/React.createElement(NuevaMatriculaPage, null)
 }, {
   path: '/editar-alumno/:id',
   element: /*#__PURE__*/React.createElement(EditarAlumnoPage, null)
@@ -41140,21 +41147,34 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "REACT JS MATRICULA"), /*#__PURE__*/React.createElement(Titulo, {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "REACT JS MATRICULA"), /*#__PURE__*/React.createElement("div", {
+        style: {
+          "width": "100%",
+          "display": "flex"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          "width": "calc(100% / 3)"
+        }
+      }, /*#__PURE__*/React.createElement(Titulo, {
         entidad: "Alumnos",
         emoji: "\uD83D\uDC68\u200D\uD83C\uDF93"
       }), /*#__PURE__*/React.createElement(AlumnoList, {
         alumnos: this.state.alumnos
       }), /*#__PURE__*/React.createElement(Link, {
         to: "/nuevo-alumno"
-      }, "Nuevo Alumno"), /*#__PURE__*/React.createElement(Titulo, {
+      }, "Nuevo Alumno")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          "width": "calc(100% / 3)"
+        }
+      }, /*#__PURE__*/React.createElement(Titulo, {
         entidad: "Cursos",
         emoji: "\uD83D\uDCD7"
       }), /*#__PURE__*/React.createElement(CursoList, {
         cursos: this.state.cursos
       }), /*#__PURE__*/React.createElement(Link, {
         to: "/nuevo-curso"
-      }, "Nuevo Curso"));
+      }, "Nuevo Curso"))));
     }
   }]);
   return HomePage;
@@ -41221,7 +41241,7 @@ var Alumno = /*#__PURE__*/function (_React$Component4) {
       var id = this.props.alumno._links.self.href.split("/").slice(-1);
       return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, this.props.alumno.nombre), /*#__PURE__*/React.createElement("td", null, this.props.alumno.apellido), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(Link, {
         to: "/ver-alumno/" + id
-      }, "Ver"), /*#__PURE__*/React.createElement(Link, {
+      }, "Ver"), " |", /*#__PURE__*/React.createElement(Link, {
         to: "/editar-alumno/" + id
       }, "Editar")));
     }
@@ -41241,7 +41261,7 @@ var Curso = /*#__PURE__*/function (_React$Component5) {
       var id = this.props.curso._links.self.href.split("/").slice(-1);
       return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, this.props.curso.nombre), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(Link, {
         to: "/ver-curso/" + id
-      }, "Ver"), /*#__PURE__*/React.createElement(Link, {
+      }, "Ver"), " |", /*#__PURE__*/React.createElement(Link, {
         to: "/editar-curso/" + id
       }, "Editar")));
     }
