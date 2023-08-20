@@ -32,7 +32,7 @@ const EditarCursoPage = ()=>{
 
             <form onSubmit={handleSubmit}>
                 <label>Nombre</label> <br/>
-                <input type="text" id="nombre" name="nombre" value={alumno.nombre} onChange={(e)=>setAlunmo({...alumno, nombre: e.target.value})} /> <br/>
+                <input type="text" id="nombre" name="nombre" value={curso.nombre} onChange={(e)=>setCurso({...curso, nombre: e.target.value})} /> <br/>
         
                 <input type="submit" value="Editar Curso" /> <br/>
                 <Link to="/">Volver</Link>
