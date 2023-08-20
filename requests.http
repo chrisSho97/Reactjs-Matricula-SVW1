@@ -1,0 +1,36 @@
+@server=http://localhost:8083
+###
+GET {{server}}/api/alumnos
+
+###
+
+POST {{server}}/api/alumnos
+Content-Type: application/json
+
+{"nombre":"Christian", "apellido":"Pancich", "turno":"Noche"}
+
+###
+GET {{server}}/api/alumnos/2
+###
+
+DELETE {{server}}/api/alumnos/2
+Content-Type: application/x-www-form-urlencoded
+
+
+##con la segunda tablaGET {{server}}/api/alumnos
+###
+
+GET {{server}}/api/cursos
+
+###
+POST {{server}}/api/cursos
+Content-Type: application/json
+
+{"nombre":"Programación"}
+
+###
+GET {{server}}/api/cursos/4
+###
+
+DELETE {{server}}/api/cursos/2
+Content-Type: application/x-www-form-urlencoded
